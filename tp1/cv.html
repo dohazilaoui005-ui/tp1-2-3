@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doha Zilaoui – Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0d1b2a;
+      --navy-mid: #1a2d42;
+      --navy-light: #22405c;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f8f5ef;
+      --cream-dark: #ede8df;
+      --text: #1a1612;
+      --text-muted: #5a5248;
+      --text-light: #8a837a;
+      --border: rgba(10,20,35,0.12);
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    nav .brand {
+      font-family: var(--font-display);
+      color: var(--gold);
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 8px;
+    }
+
+    nav ul a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    nav ul a:hover {
+      color: var(--gold-light);
+      background: rgba(201,168,76,0.1);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 80px 5% 70px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .header-photo {
+      position: relative;
+    }
+
+    .header-photo::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    .header-photo img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      display: block;
+    }
+
+    .header-info h1 {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+
+    .header-info h2 {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+    }
+
+    .contact-row a, .contact-row span {
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .contact-row a:hover { color: var(--gold-light); }
+
+    .contact-icon {
+      width: 16px;
+      height: 16px;
+      fill: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── SOCIAL LINKS ── */
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 16px;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 40px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+
+    .social-links a:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .social-links svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5% 80px;
+    }
+
+    /* ── SECTION STYLES ── */
+    section {
+      padding: 64px 0 0;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+    }
+
+    /* ── À PROPOS ── */
+    #apropos .about-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-meta h3 {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+
+    .lang-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .lang-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+
+    .lang-list .level {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      background: var(--cream-dark);
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    .interest-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .interest-pill {
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+    }
+
+    /* ── COMPÉTENCES ── */
+    #competences .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      border-top: 3px solid var(--gold);
+    }
+
+    .skill-card h3 {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .skill-card ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .skill-card ul li {
+      font-size: 0.82rem;
+      padding: 3px 10px;
+      background: var(--cream);
+      border-radius: 6px;
+      color: var(--text-muted);
+      border: 1px solid var(--cream-dark);
+    }
+
+    /* ── EXPÉRIENCES TABLE ── */
+    #experiences table, #formations table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    table thead {
+      background: var(--navy);
+      color: white;
+    }
+
+    table thead th {
+      padding: 14px 20px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    table tbody tr {
+      border-bottom: 1px solid var(--cream-dark);
+      transition: background 0.15s;
+    }
+
+    table tbody tr:last-child { border-bottom: none; }
+
+    table tbody tr:hover { background: var(--cream); }
+
+    table tbody td {
+      padding: 14px 20px;
+      vertical-align: top;
+      color: var(--text-muted);
+    }
+
+    table tbody td:first-child {
+      font-weight: 500;
+      color: var(--navy-light);
+      white-space: nowrap;
+    }
+
+    table tbody td strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .tag-tech {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      background: rgba(13,27,42,0.07);
+      border-radius: 4px;
+      margin: 2px 2px 0 0;
+      color: var(--navy-light);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 28px 5%;
+      font-size: 0.82rem;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      header {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .header-photo { margin: 0 auto; }
+      .contact-row { justify-content: center; }
+      .social-links { justify-content: center; }
+      #apropos .about-card { grid-template-columns: 1fr; }
+      nav ul { gap: 0; }
+      nav ul a { padding: 6px 8px; font-size: 0.72rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <span class="brand">Doha Zilaoui</span>
+    <ul>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#experiences">Expériences</a></li>
+      <li><a href="#formations">Formations</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADER / HERO -->
+  <header id="top">
+    <div class="header-photo">
+      <img
+        src="\IMG_6285.JPG"
+        alt="Photo de profil de Doha Zilaoui"
+      />
+    </div>
+
+    <div class="header-info">
+      <h1>Doha Zilaoui</h1>
+      <h2>Étudiante ingénieure · Big Data &amp; Cloud Computing</h2>
+
+      <div class="contact-row">
+        <a href="mailto:dohazilaoui005@gmail.com" rel="noopener noreferrer">
+          <svg class="contact-icon" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
+          dohazilaoui005@gmail.com
+        </a>
+        <a href="tel:+212646670571">
+          <svg class="contact-icon" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/></svg>
+          0646 670 571
+        </a>
+        <span>
+          <svg class="contact-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
+          Casablanca, Maroc
+        </span>
+      </div>
+
+      <!-- Liens réseaux sociaux -->
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/doha-zil-63848527b?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14Zm-8.5 6.5h-2V17h2V9.5ZM9.5 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM17 17v-4c0-2-1-3-2.5-3a2.5 2.5 0 0 0-2 1V9.5h-2V17h2v-4c0-1 .5-1.5 1.5-1.5s1 .5 1 1.5V17h2Z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/dohazilaoui005-ui" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main>
+
+    <!-- SECTION À PROPOS -->
+    <section id="apropos">
+      <h2 class="section-title">À propos</h2>
+      <div class="about-card">
+        <div class="about-text">
+          <p>
+            Étudiante ingénieure à l'ENSET de Mohammedia, spécialisée en <strong>Big Data et Cloud Computing</strong>. Passionnée par le développement full-stack, l'intelligence artificielle et la résolution de problèmes complexes.
+          </p>
+          <p>
+            Forte de deux stages chez IBM ainsi que d'une expérience en hackathon récompensée d'un 3e prix, je combine rigueur technique et esprit d'initiative pour mener des projets innovants.
+          </p>
+          <p>
+            Curieuse, polyglotte et animée par l'envie d'apprendre, je m'intéresse autant à la robotique qu'aux langues, au basket et à l'enseignement bénévole.
+          </p>
+        </div>
+
+        <div class="about-meta">
+          <h3>Langues</h3>
+          <ul class="lang-list">
+            <li>Arabe <span class="level">Langue maternelle</span></li>
+            <li>Français <span class="level">Avancé</span></li>
+            <li>Anglais <span class="level">Avancé</span></li>
+            <li>Espagnol <span class="level">Intermédiaire</span></li>
+            <li>Allemand <span class="level">Débutant</span></li>
+          </ul>
+
+          <h3>Centres d'intérêt</h3>
+          <div class="interest-pills">
+            <span class="interest-pill">Intelligence Artificielle</span>
+            <span class="interest-pill">Basketball</span>
+            <span class="interest-pill">Langues</span>
+            <span class="interest-pill">Robotique</span>
+            <span class="interest-pill">Résolution de problèmes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION COMPÉTENCES -->
+    <section id="competences">
+      <h2 class="section-title">Compétences</h2>
+      <div class="skills-grid">
+
+        <div class="skill-card">
+          <h3>Langages de programmation</h3>
+          <ul>
+            <li>Python</li>
+            <li>Java</li>
+            <li>C</li>
+            <li>PHP</li>
+            <li>Visual Basic</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <h3>Développement web</h3>
+          <ul>
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>React.js</li>
+            <li>Tailwind CSS</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <h3>Frameworks &amp; Bibliothèques</h3>
+          <ul>
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>Django</li>
+            <li>React.js</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <h3>Bases de données</h3>
+          <ul>
+            <li>MySQL</li>
+            <li>SQL Server</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <h3>Outils &amp; Méthodes</h3>
+          <ul>
+            <li>VSCode</li>
+            <li>Postman</li>
+            <li>Insomnia</li>
+            <li>XAMP</li>
+            <li>Canva</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <h3>Méthodologies</h3>
+          <ul>
+            <li>MERISE</li>
+            <li>UML</li>
+            <li>JWT Auth</li>
+            <li>Gestion de projet</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION EXPÉRIENCES -->
+    <section id="experiences">
+      <h2 class="section-title">Expériences professionnelles</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Période</th>
+            <th>Mission</th>
+            <th>Technologies</th>
+            <th>Compétences acquises</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025<br><small>2 mois · IBM</small></td>
+            <td><strong>Plateforme de recrutement full-stack</strong><br>Développement d'une plateforme assistant les recruteurs à publier des offres et évaluer les candidats avec matching IA.</td>
+            <td>
+              <span class="tag-tech">Django</span>
+              <span class="tag-tech">React.js</span>
+              <span class="tag-tech">JWT</span>
+              <span class="tag-tech">IA matching</span>
+            </td>
+            <td>Développement full-stack, systèmes d'authentification, intégration IA</td>
+          </tr>
+          <tr>
+            <td>2023<br><small>15 jours · IBM</small></td>
+            <td><strong>Site de réservation pour un fitness club</strong><br>Conception et développement d'une plateforme web de réservation complète.</td>
+            <td>
+              <span class="tag-tech">HTML</span>
+              <span class="tag-tech">CSS</span>
+              <span class="tag-tech">JavaScript</span>
+              <span class="tag-tech">Node.js</span>
+            </td>
+            <td>Gestion de projet, environnement professionnel</td>
+          </tr>
+          <tr>
+            <td>2023<br><small>2 jours · Hackathon IA</small></td>
+            <td><strong>3e prix – Hackathon Innovation IA</strong><br>Encadrement de l'équipe, coordination et mise en œuvre d'idées innovantes.</td>
+            <td>
+              <span class="tag-tech">Intelligence Artificielle</span>
+            </td>
+            <td>Leadership, travail d'équipe, créativité sous pression</td>
+          </tr>
+          <tr>
+            <td>2023<br><small>1 jour · Vivo Energy</small></td>
+            <td><strong>Innovation Camp – Vivo Energy</strong><br>Participation à un camp d'innovation organisé par Vivo Energy.</td>
+            <td>–</td>
+            <td>Brainstorming, prototypage rapide, travail collaboratif</td>
+          </tr>
+          <tr>
+            <td>2023–2024<br><small>Injaz Al Maghrib</small></td>
+            <td><strong>Film institutionnel &amp; Concours d'entrepreneuriat</strong><br>Tournage d'une vidéo institutionnelle et participation au concours régional Injaz Al Maghrib.</td>
+            <td>–</td>
+            <td>Communication, entrepreneuriat, innovation</td>
+          </tr>
+          <tr>
+            <td>2023<br><small>1 semaine · Bénévolat</small></td>
+            <td><strong>Enseignante d'anglais bénévole</strong><br>Enseignement de l'anglais à des apprenants locaux dans un village.</td>
+            <td>–</td>
+            <td>Pédagogie, communication interculturelle</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION FORMATIONS -->
+    <section id="formations">
+      <h2 class="section-title">Formations</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Période</th>
+            <th>Diplôme</th>
+            <th>Établissement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025 – 2026</td>
+            <td><strong>Cycle ingénieur – Big Data &amp; Cloud Computing</strong></td>
+            <td>ENSET, Mohammedia</td>
+          </tr>
+          <tr>
+            <td>2023 – 2025</td>
+            <td><strong>BTS – Développement des Systèmes Informatiques</strong></td>
+            <td>Lycée Abdrahman Ibn Ghazala, Casablanca</td>
+          </tr>
+          <tr>
+            <td>2022 – 2023</td>
+            <td><strong>Baccalauréat – Sciences Mathématiques, section française</strong></td>
+            <td>Lycée Ibn Mandour, Casablanca</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      &copy; 2025 Doha Zilaoui &mdash;
+      <a href="mailto:dohazilaoui005@gmail.com">dohazilaoui005@gmail.com</a>
+      &mdash; Casablanca, Maroc
+    </p>
+  </footer>
+
+</body>
+</html>

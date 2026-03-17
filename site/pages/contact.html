@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – NexaCore</title>
+  <meta name="description" content="Contactez NexaCore pour discuter de votre projet IA, demander un devis ou planifier un audit gratuit. Nous répondons sous 24h." />
+  <meta name="author" content="NexaCore" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nexacore.io/pages/contact.html" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://nexacore.io/pages/contact.html" />
+  <meta property="og:title"       content="Contactez NexaCore – Parlons de votre projet" />
+  <meta property="og:description" content="Un audit gratuit de 30 minutes pour identifier vos opportunités IA. Réponse garantie sous 24h." />
+  <meta property="og:image"       content="https://nexacore.io/images/og-contact.jpg" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23080c14'/><text y='24' x='4' font-size='22' fill='%230ff4c6'>N</text></svg>" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    /* LAYOUT */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* FORM CARD */
+    .form-card {
+      background: var(--ink-mid);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 48px;
+    }
+    .form-card h2 { margin-bottom: 8px; font-size: 1.6rem; }
+    .form-card > p { font-size: 0.9rem; margin-bottom: 36px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-row.single { grid-template-columns: 1fr; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 20px;
+    }
+    .form-group:first-child { margin-top: 0; }
+    .form-group label {
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+    .form-group label .req { color: var(--teal); margin-left: 2px; }
+
+    /* inputs inherit from main.css .form-control */
+    select.form-control {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      -webkit-appearance: none;
+      appearance: none;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+    .form-control option { background: var(--ink-mid); }
+
+    /* Range input */
+    input[type="range"].form-control {
+      padding: 6px 0;
+      accent-color: var(--teal);
+      border: none;
+      background: none;
+      box-shadow: none;
+    }
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--slate);
+      margin-top: 4px;
+    }
+    #budget-display {
+      font-family: var(--font-head);
+      font-weight: 700;
+      color: var(--teal);
+      font-size: 1rem;
+      text-align: right;
+    }
+
+    /* Checkbox/radio custom */
+    .check-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .check-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .check-opt input[type="checkbox"],
+    .check-opt input[type="radio"] {
+      width: 17px; height: 17px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+    .check-opt span {
+      font-size: 0.87rem;
+      color: var(--mist);
+      line-height: 1.4;
+    }
+
+    /* File input */
+    input[type="file"].form-control {
+      padding: 10px 14px;
+      font-size: 0.84rem;
+      color: var(--slate);
+    }
+    input[type="file"].form-control::file-selector-button {
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--ink-light);
+      color: var(--teal);
+      border: 1px solid var(--border-hi);
+      border-radius: 4px;
+      padding: 4px 12px;
+      margin-right: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    input[type="file"].form-control::file-selector-button:hover { background: var(--teal-glow); }
+
+    .submit-wrap {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn-submit-contact {
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--teal);
+      border: none;
+      border-radius: var(--r-sm);
+      padding: 16px;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-submit-contact:hover { background: var(--teal-dim); transform: translateY(-1px); }
+    .privacy-note { font-size: 0.73rem; color: var(--slate); text-align: center; }
+    .privacy-note a { color: var(--teal); text-decoration: underline; }
+
+    /* SUCCESS */
+    .success-msg {
+      display: none;
+      background: rgba(15,244,198,0.07);
+      border: 1px solid var(--border-hi);
+      border-radius: var(--r-md);
+      padding: 20px 24px;
+      margin-top: 16px;
+      text-align: center;
+    }
+    .success-msg.show { display: block; }
+    .success-msg h3 { color: var(--teal); font-size: 1rem; margin-bottom: 4px; }
+    .success-msg p { font-size: 0.84rem; }
+
+    /* SIDEBAR */
+    .contact-sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+    .info-card {
+      background: var(--ink-mid);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+    }
+    .info-card h3 {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 18px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .contact-item:last-child { margin-bottom: 0; }
+    .contact-ico {
+      width: 36px; height: 36px;
+      border-radius: var(--r-sm);
+      background: var(--teal-glow);
+      border: 1px solid var(--border-hi);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-detail { font-size: 0.87rem; }
+    .contact-detail strong { display: block; color: var(--white); font-weight: 500; margin-bottom: 2px; }
+    .contact-detail a { color: var(--slate); transition: color 0.2s; }
+    .contact-detail a:hover { color: var(--teal); }
+
+    /* MAP */
+    .map-wrap {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 280px;
+      border: none;
+      display: block;
+      filter: invert(92%) hue-rotate(180deg) brightness(0.85) saturate(0.8);
+    }
+
+    /* HOURS TABLE */
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    .hours-table td { padding: 7px 0; color: var(--slate); }
+    .hours-table td:first-child { color: var(--mist); font-weight: 500; }
+    .hours-table td:last-child { text-align: right; }
+    .hours-table tr { border-bottom: 1px solid rgba(148,163,184,0.08); }
+    .hours-table tr:last-child { border-bottom: none; }
+
+    @media (max-width: 960px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .form-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav" role="navigation" aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Nexa<span>Core</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Galerie</a></li>
+        <li><a href="contact.html" class="nav-cta btn">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <header class="page-hero">
+      <div class="container">
+        <div class="label-tag" style="justify-content:center;">Parlons de votre projet</div>
+        <h1>Nous <span class="teal">contacter</span></h1>
+        <p class="lead">Un audit gratuit de 30 minutes pour identifier vos opportunités IA. Réponse garantie sous 24h.</p>
+      </div>
+    </header>
+
+    <section style="padding-top:0;">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- ── FORMULAIRE DE CONTACT ── -->
+          <div>
+            <div class="form-card reveal">
+              <h2>Envoyez-nous un message</h2>
+              <p>Décrivez votre projet et nous vous recontacterons rapidement.</p>
+
+              <form id="contactForm" data-validate novalidate autocomplete="on">
+
+                <!-- Nom / Prénom -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="c-prenom">Prénom <span class="req">*</span></label>
+                    <input type="text" id="c-prenom" name="prenom" class="form-control"
+                      placeholder="Doha" required minlength="2" autocomplete="given-name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="c-nom">Nom <span class="req">*</span></label>
+                    <input type="text" id="c-nom" name="nom" class="form-control"
+                      placeholder="Zilaoui" required minlength="2" autocomplete="family-name" />
+                  </div>
+                </div>
+
+                <!-- Email / Téléphone -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="c-email">E-mail <span class="req">*</span></label>
+                    <input type="email" id="c-email" name="email" class="form-control"
+                      placeholder="doha@exemple.com" required autocomplete="email" />
+                  </div>
+                  <div class="form-group">
+                    <label for="c-tel">Téléphone</label>
+                    <input type="tel" id="c-tel" name="tel" class="form-control"
+                      placeholder="+212 6 00 00 00 00" autocomplete="tel"
+                      pattern="^[\+\d][\d\s\.\-]{7,20}$" />
+                  </div>
+                </div>
+
+                <!-- Entreprise / Site web -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="c-entreprise">Entreprise</label>
+                    <input type="text" id="c-entreprise" name="entreprise" class="form-control"
+                      placeholder="Acme Corp" autocomplete="organization" />
+                  </div>
+                  <div class="form-group">
+                    <label for="c-site">Site web</label>
+                    <input type="url" id="c-site" name="site" class="form-control"
+                      placeholder="https://exemple.com" autocomplete="url" />
+                  </div>
+                </div>
+
+                <!-- Type de service -->
+                <div class="form-row single">
+                  <div class="form-group">
+                    <label for="c-service">Type de service <span class="req">*</span></label>
+                    <select id="c-service" name="service" class="form-control" required>
+                      <option value="" disabled selected>— Sélectionnez un service —</option>
+                      <option value="ia">IA & Machine Learning</option>
+                      <option value="cloud">Cloud & Infrastructure</option>
+                      <option value="data">Data Engineering & Analytics</option>
+                      <option value="cyber">Cybersécurité IA</option>
+                      <option value="rpa">Automatisation RPA</option>
+                      <option value="formation">Formation & Coaching</option>
+                      <option value="autre">Autre / Plusieurs services</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Budget (range) -->
+                <div class="form-row single">
+                  <div class="form-group">
+                    <label for="c-budget">Budget estimé</label>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <span style="font-size:0.8rem; color:var(--slate);">De 2 000 € à 100 000 €+</span>
+                      <span id="budget-display">20 000 €</span>
+                    </div>
+                    <input type="range" id="c-budget" name="budget" class="form-control"
+                      min="2000" max="100000" step="1000" value="20000"
+                      oninput="updateBudget(this.value)" />
+                    <div class="range-labels">
+                      <span>2 000 €</span><span>25 000 €</span><span>50 000 €</span><span>100 000 €+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Date souhaitée -->
+                <div class="form-row single">
+                  <div class="form-group">
+                    <label for="c-date">Date de démarrage souhaitée</label>
+                    <input type="date" id="c-date" name="date" class="form-control"
+                      autocomplete="off" />
+                  </div>
+                </div>
+
+                <!-- Comment nous avez-vous connus (radio) -->
+                <div class="form-row single">
+                  <div class="form-group">
+                    <label>Comment nous avez-vous connus ?</label>
+                    <div class="check-options" role="radiogroup" aria-label="Source de découverte">
+                      <label class="check-opt">
+                        <input type="radio" name="source" value="google" />
+                        <span>Recherche Google / SEO</span>
+                      </label>
+                      <label class="check-opt">
+                        <input type="radio" name="source" value="linkedin" />
+                        <span>LinkedIn</span>
+                      </label>
+                      <label class="check-opt">
+                        <input type="radio" name="source" value="recommandation" />
+                        <span>Recommandation d'un client</span>
+                      </label>
+                      <label class="check-opt">
+                        <input type="radio" name="source" value="evenement" />
+                        <span>Événement / Conférence</span>
+                      </label>
+                      <label class="check-opt">
+                        <input type="radio" name="source" value="autre" />
+                        <span>Autre</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Message -->
+                <div class="form-row single">
+                  <div class="form-group">
+                    <label for="c-message">Message <span class="req">*</span></label>
+                    <textarea id="c-message" name="message" class="form-control"
+                      placeholder="Décrivez votre projet, vos enjeux et vos objectifs…"
+                      required minlength="30" maxlength="2000"
+                      oninput="updateCount(this)"></textarea>
+                    <div style="text-align:right; font-size:0.72rem; color:var(--slate); margin-top:4px;">
+                      <span id="msg-count">0</span> / 2000
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pièce jointe -->
+                <div class="form-row single">
+                  <div class="form-group">
+                    <label for="c-fichier">Pièce jointe (optionnel)</label>
+                    <input type="file" id="c-fichier" name="fichier" class="form-control"
+                      accept=".pdf,.doc,.docx,.pptx,.zip" />
+                    <p style="font-size:0.72rem; color:var(--slate); margin-top:4px;">
+                      Formats acceptés : PDF, Word, PowerPoint, ZIP · Max. 10 Mo
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Acceptations (checkboxes) -->
+                <div class="form-row single" style="margin-top:20px;">
+                  <div class="form-group" style="margin-top:0; gap:12px;">
+                    <label class="check-opt">
+                      <input type="checkbox" name="rgpd" id="c-rgpd" required />
+                      <span>J'accepte que mes données soient traitées conformément à la <a href="#" style="color:var(--teal);">politique de confidentialité</a> de NexaCore. <span class="req">*</span></span>
+                    </label>
+                    <label class="check-opt">
+                      <input type="checkbox" name="newsletter" id="c-newsletter" />
+                      <span>Je souhaite recevoir la newsletter NexaCore (actualités IA, cas d'usage, webinaires).</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="submit-wrap">
+                  <button type="submit" class="btn-submit-contact" id="contact-submit">
+                    Envoyer le message →
+                  </button>
+                  <p class="privacy-note">🔒 Vos données sont sécurisées et ne seront jamais revendues. <a href="#">En savoir plus</a></p>
+                </div>
+
+              </form>
+
+              <div class="success-msg" id="success-contact" role="status" aria-live="polite">
+                <h3>✓ Message envoyé avec succès !</h3>
+                <p>Merci ! Notre équipe vous répondra dans les 24 heures ouvrées.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SIDEBAR ── -->
+          <div class="contact-sidebar">
+
+            <!-- INFOS CONTACT -->
+            <div class="info-card reveal">
+              <h3>Informations de contact</h3>
+              <div class="contact-item">
+                <div class="contact-ico" aria-hidden="true">📧</div>
+                <div class="contact-detail">
+                  <strong>E-mail</strong>
+                  <a href="mailto:hello@nexacore.io">hello@nexacore.io</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-ico" aria-hidden="true">📞</div>
+                <div class="contact-detail">
+                  <strong>Téléphone</strong>
+                  <a href="tel:+212522000000">+212 5 22 00 00 00</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-ico" aria-hidden="true">📍</div>
+                <div class="contact-detail">
+                  <strong>Siège social</strong>
+                  <address style="font-style:normal; color:var(--slate);">
+                    123 Boulevard Anfa<br />
+                    Casablanca 20050, Maroc
+                  </address>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-ico" aria-hidden="true">🏢</div>
+                <div class="contact-detail">
+                  <strong>Bureau Paris</strong>
+                  <span style="color:var(--slate);">15 Rue de Rivoli, 75001 Paris</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- MAP -->
+            <div class="map-wrap reveal delay-2">
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-7.6636%2C33.5567%2C-7.5436%2C33.6167&layer=mapnik&marker=33.5731%2C-7.5898"
+                title="Carte OpenStreetMap localisant les bureaux NexaCore à Casablanca, Maroc"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+              ></iframe>
+            </div>
+
+            <!-- HORAIRES -->
+            <div class="info-card reveal delay-3">
+              <h3>Horaires d'ouverture</h3>
+              <table class="hours-table" aria-label="Horaires d'ouverture NexaCore">
+                <tbody>
+                  <tr><td>Lundi – Vendredi</td><td>9h00 – 18h30</td></tr>
+                  <tr><td>Samedi</td><td>10h00 – 13h00</td></tr>
+                  <tr><td>Dimanche</td><td><em style="color:var(--slate);font-style:italic;">Fermé</em></td></tr>
+                  <tr><td>Jours fériés</td><td><em style="color:var(--slate);font-style:italic;">Sur RDV</em></td></tr>
+                </tbody>
+              </table>
+              <p style="margin-top:16px; font-size:0.8rem; color:var(--slate);">
+                ⚡ Urgences : réponse sous 4h via <a href="mailto:urgent@nexacore.io" style="color:var(--teal);">urgent@nexacore.io</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Nexa<span>Core</span></a>
+          <p>Agence de conseil en intelligence artificielle et transformation digitale. Casablanca · Paris · Montréal.</p>
+        </div>
+        <nav class="footer-col" aria-label="Plan du site">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="about.html">À propos</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Galerie</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Services">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">IA & Machine Learning</a></li>
+            <li><a href="services.html">Cloud & DevOps</a></li>
+            <li><a href="services.html">Data Engineering</a></li>
+            <li><a href="services.html">Cybersécurité</a></li>
+            <li><a href="services.html">Formation</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@nexacore.io">hello@nexacore.io</a></li>
+            <li><a href="tel:+212522000000">+212 5 22 00 00 00</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 NexaCore SAS – SIRET 123 456 789 00012 – RC Casa 987654</p>
+        <nav class="footer-legal" aria-label="Mentions légales">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">CGU</a>
+          <a href="#">Cookies</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function updateBudget(val) {
+      const n = parseInt(val);
+      document.getElementById('budget-display').textContent =
+        n >= 100000 ? '100 000 €+' : n.toLocaleString('fr-FR') + ' €';
+    }
+    function updateCount(el) {
+      document.getElementById('msg-count').textContent = el.value.length;
+    }
+
+    /* Set date min to today */
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('c-date').min = today;
+
+    /* Form submit with success */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+      }
+      const btn = document.getElementById('contact-submit');
+      btn.textContent = '⏳ Envoi en cours…';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('success-contact').classList.add('show');
+        document.getElementById('success-contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        btn.textContent = 'Envoyer le message →';
+        btn.disabled = false;
+        this.reset();
+        document.getElementById('budget-display').textContent = '20 000 €';
+        document.getElementById('msg-count').textContent = '0';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

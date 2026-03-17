@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services & Tarifs – NexaCore</title>
+  <meta name="description" content="Découvrez tous les services NexaCore : IA, cloud, data engineering, cybersécurité, RPA, formation. Tarifs transparents et sur-mesure." />
+  <meta name="author" content="NexaCore" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nexacore.io/pages/services.html" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://nexacore.io/pages/services.html" />
+  <meta property="og:title"       content="Services NexaCore – IA, Cloud & Data" />
+  <meta property="og:description" content="Des solutions IA et data complètes, du conseil stratégique au déploiement en production." />
+  <meta property="og:image"       content="https://nexacore.io/images/og-services.jpg" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23080c14'/><text y='24' x='4' font-size='22' fill='%230ff4c6'>N</text></svg>" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    /* ACCORDION (details/summary) */
+    .accordion { display: flex; flex-direction: column; gap: 12px; }
+    details {
+      background: var(--ink-mid);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    details[open] { border-color: var(--border-hi); }
+    details[open] summary { color: var(--teal); }
+    summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px;
+      cursor: pointer;
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      list-style: none;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .summary-left { display: flex; align-items: center; gap: 16px; }
+    .summary-icon { font-size: 1.3rem; }
+    .summary-arrow {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      transition: transform 0.3s, border-color 0.3s;
+      flex-shrink: 0;
+    }
+    details[open] .summary-arrow {
+      transform: rotate(180deg);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .details-body {
+      padding: 0 28px 28px;
+      border-top: 1px solid var(--border);
+      margin-top: 0;
+    }
+    .details-body p { margin-top: 20px; font-size: 0.92rem; }
+    .details-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+      margin-top: 16px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--mist);
+    }
+    .feature-item::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+    .details-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .tag {
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      background: var(--ink-light);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--slate);
+      font-family: var(--font-head);
+      letter-spacing: 0.05em;
+    }
+
+    /* PRICING TABLE */
+    .pricing-table-wrap { overflow-x: auto; border-radius: var(--r-lg); border: 1px solid var(--border); }
+    table.pricing {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+    }
+    .pricing th, .pricing td {
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 0.88rem;
+    }
+    .pricing thead tr:first-child th {
+      background: var(--ink-faint);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      padding: 22px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing thead tr:first-child th:first-child {
+      text-align: left;
+      color: var(--teal);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--ink-light);
+    }
+    .pricing thead tr:nth-child(2) th {
+      background: var(--ink-light);
+      font-size: 0.8rem;
+      color: var(--slate);
+      border-bottom: 2px solid var(--border);
+      font-weight: 400;
+    }
+    .pricing tbody tr { border-bottom: 1px solid var(--border); transition: background 0.2s; }
+    .pricing tbody tr:last-child { border-bottom: none; }
+    .pricing tbody tr:hover { background: rgba(15,244,198,0.03); }
+    .pricing td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: var(--mist);
+      background: var(--ink-mid);
+    }
+    .pricing td.category-head {
+      background: var(--ink-light);
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      padding: 10px 20px;
+      text-align: left;
+    }
+    .check { color: var(--teal); font-size: 1rem; }
+    .cross { color: var(--slate); opacity: 0.4; font-size: 0.9rem; }
+    .price-highlight {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .plan-recommended {
+      background: linear-gradient(to bottom, rgba(15,244,198,0.08), transparent) !important;
+      border-left: 2px solid var(--teal);
+      border-right: 2px solid var(--teal);
+    }
+    .recommended-badge {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--ink);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 4px;
+    }
+
+    /* PROCESS */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, var(--teal), var(--border));
+      z-index: 0;
+    }
+    .process-step {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-bubble {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--ink);
+      border: 2px solid var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-family: var(--font-head);
+      font-weight: 800;
+      color: var(--teal);
+      font-size: 1.1rem;
+      box-shadow: 0 0 20px rgba(15,244,198,0.2);
+    }
+    .process-step h3 { font-size: 0.95rem; margin-bottom: 8px; }
+    .process-step p { font-size: 0.82rem; }
+
+    @media (max-width: 768px) {
+      .details-features { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process-steps::before { display: none; }
+    }
+    @media (max-width: 480px) {
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav" role="navigation" aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Nexa<span>Core</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Galerie</a></li>
+        <li><a href="contact.html" class="nav-cta btn">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <header class="page-hero">
+      <div class="container">
+        <div class="label-tag" style="justify-content:center;">Ce que nous faisons</div>
+        <h1>Nos <span class="teal">services</span></h1>
+        <p class="lead">Des solutions IA et digitales complètes, du conseil stratégique au déploiement et à la maintenance.</p>
+      </div>
+    </header>
+
+    <!-- ACCORDION SERVICES -->
+    <section style="padding-top:0;">
+      <div class="container">
+        <div class="section-head">
+          <div class="label-tag">En détail</div>
+          <h2>Explorez nos expertises</h2>
+        </div>
+        <div class="accordion" id="services-accordion">
+
+          <details open>
+            <summary>
+              <span class="summary-left">
+                <span class="summary-icon" aria-hidden="true">🧠</span>
+                Intelligence Artificielle & Machine Learning
+              </span>
+              <span class="summary-arrow" aria-hidden="true">▾</span>
+            </summary>
+            <div class="details-body">
+              <p>Nous concevons et déployons des modèles d'apprentissage automatique adaptés à vos données et à vos objectifs. Du NLP au computer vision, en passant par les systèmes de recommandation et la détection d'anomalies.</p>
+              <div class="details-features">
+                <span class="feature-item">Modèles de classification et régression</span>
+                <span class="feature-item">Traitement du langage naturel (NLP)</span>
+                <span class="feature-item">Vision par ordinateur (CV)</span>
+                <span class="feature-item">Systèmes de recommandation</span>
+                <span class="feature-item">Détection de fraude et anomalies</span>
+                <span class="feature-item">LLMs et IA générative</span>
+                <span class="feature-item">MLOps & monitoring en production</span>
+                <span class="feature-item">Explicabilité et audit IA (XAI)</span>
+              </div>
+              <div class="details-tags">
+                <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">PyTorch</span>
+                <span class="tag">Hugging Face</span><span class="tag">MLflow</span><span class="tag">Kubeflow</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span class="summary-left">
+                <span class="summary-icon" aria-hidden="true">☁️</span>
+                Cloud & Infrastructure DevOps
+              </span>
+              <span class="summary-arrow" aria-hidden="true">▾</span>
+            </summary>
+            <div class="details-body">
+              <p>Migration vers le cloud, conception d'architectures résilientes et mise en place de pipelines CI/CD. Nous vous accompagnons sur AWS, Google Cloud et Microsoft Azure.</p>
+              <div class="details-features">
+                <span class="feature-item">Audit et stratégie cloud</span>
+                <span class="feature-item">Migration lift & shift ou re-platforming</span>
+                <span class="feature-item">Architecture microservices & Kubernetes</span>
+                <span class="feature-item">Pipelines CI/CD automatisés</span>
+                <span class="feature-item">Infrastructure as Code (Terraform)</span>
+                <span class="feature-item">Monitoring & observabilité</span>
+              </div>
+              <div class="details-tags">
+                <span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Azure</span>
+                <span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">Terraform</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span class="summary-left">
+                <span class="summary-icon" aria-hidden="true">📊</span>
+                Data Engineering & Analytics
+              </span>
+              <span class="summary-arrow" aria-hidden="true">▾</span>
+            </summary>
+            <div class="details-body">
+              <p>Construction de pipelines de données robustes, data lakes, entrepôts de données et tableaux de bord décisionnels pour transformer vos données brutes en avantages compétitifs.</p>
+              <div class="details-features">
+                <span class="feature-item">Architecture data lake / data warehouse</span>
+                <span class="feature-item">ETL / ELT et pipelines temps réel</span>
+                <span class="feature-item">Business Intelligence & dashboards</span>
+                <span class="feature-item">Data quality & gouvernance</span>
+                <span class="feature-item">Streaming avec Kafka & Flink</span>
+                <span class="feature-item">Analytics avancé & reporting</span>
+              </div>
+              <div class="details-tags">
+                <span class="tag">Apache Spark</span><span class="tag">Kafka</span><span class="tag">Airflow</span>
+                <span class="tag">dbt</span><span class="tag">Snowflake</span><span class="tag">Tableau</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span class="summary-left">
+                <span class="summary-icon" aria-hidden="true">🔐</span>
+                Cybersécurité & IA défensive
+              </span>
+              <span class="summary-arrow" aria-hidden="true">▾</span>
+            </summary>
+            <div class="details-body">
+              <p>Protection de vos systèmes IA, audit de conformité RGPD, détection des attaques adversariales et sécurisation des données sensibles dans vos pipelines ML.</p>
+              <div class="details-features">
+                <span class="feature-item">Audit de sécurité des modèles IA</span>
+                <span class="feature-item">Détection d'intrusion par IA</span>
+                <span class="feature-item">Conformité RGPD & EU AI Act</span>
+                <span class="feature-item">Protection contre les attaques adversariales</span>
+                <span class="feature-item">Anonymisation et privacy by design</span>
+                <span class="feature-item">Pen testing des APIs ML</span>
+              </div>
+              <div class="details-tags">
+                <span class="tag">SIEM</span><span class="tag">SOAR</span><span class="tag">Snyk</span>
+                <span class="tag">Vault</span><span class="tag">Differential Privacy</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span class="summary-left">
+                <span class="summary-icon" aria-hidden="true">🤖</span>
+                Automatisation RPA & Process Mining
+              </span>
+              <span class="summary-arrow" aria-hidden="true">▾</span>
+            </summary>
+            <div class="details-body">
+              <p>Automatisation intelligente de vos processus métiers répétitifs grâce aux robots logiciels et à l'IA. Réduction des erreurs, gain de temps, libération de vos équipes pour les tâches à valeur ajoutée.</p>
+              <div class="details-features">
+                <span class="feature-item">Cartographie et optimisation des processus</span>
+                <span class="feature-item">Bots RPA avec IA cognitive</span>
+                <span class="feature-item">Traitement automatisé des documents</span>
+                <span class="feature-item">Intégrations API et webhooks</span>
+              </div>
+              <div class="details-tags">
+                <span class="tag">UiPath</span><span class="tag">Automation Anywhere</span>
+                <span class="tag">n8n</span><span class="tag">Make</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span class="summary-left">
+                <span class="summary-icon" aria-hidden="true">🎓</span>
+                Formation & Acculturation IA
+              </span>
+              <span class="summary-arrow" aria-hidden="true">▾</span>
+            </summary>
+            <div class="details-body">
+              <p>Programmes de formation sur-mesure pour tous les niveaux, du management aux équipes techniques. Ateliers pratiques, bootcamps et coaching individuel.</p>
+              <div class="details-features">
+                <span class="feature-item">Formation IA pour dirigeants</span>
+                <span class="feature-item">Bootcamp Data Science (5 jours)</span>
+                <span class="feature-item">Atelier prompt engineering</span>
+                <span class="feature-item">Coaching technique 1-to-1</span>
+              </div>
+              <div class="details-tags">
+                <span class="tag">Présentiel</span><span class="tag">En ligne</span><span class="tag">Blended</span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESSUS -->
+    <section style="background:var(--ink-mid);">
+      <div class="container">
+        <div class="section-head">
+          <div class="label-tag">Comment on travaille</div>
+          <h2>Notre processus en 4 étapes</h2>
+        </div>
+        <div class="process-steps">
+          <div class="process-step reveal">
+            <div class="step-bubble">1</div>
+            <h3>Découverte</h3>
+            <p>Audit gratuit de 30 min pour comprendre vos enjeux, vos données et vos objectifs.</p>
+          </div>
+          <div class="process-step reveal delay-2">
+            <div class="step-bubble">2</div>
+            <h3>Stratégie</h3>
+            <p>Proposition détaillée avec roadmap, technologies recommandées et ROI estimé.</p>
+          </div>
+          <div class="process-step reveal delay-3">
+            <div class="step-bubble">3</div>
+            <h3>Exécution</h3>
+            <p>Sprints agiles de 2 semaines avec livraisons régulières et feedback continu.</p>
+          </div>
+          <div class="process-step reveal delay-4">
+            <div class="step-bubble">4</div>
+            <h3>Déploiement</h3>
+            <p>Mise en production sécurisée, documentation complète et support post-livraison.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLEAU DE TARIFS (colspan + rowspan) -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div class="label-tag">Nos tarifs</div>
+          <h2>Transparence tarifaire</h2>
+          <p>Des prix clairs, sans surprises. Toutes nos offres sont personnalisables selon votre contexte.</p>
+        </div>
+        <div class="pricing-table-wrap reveal">
+          <table class="pricing" role="table" aria-label="Tableau comparatif des offres NexaCore">
+            <thead>
+              <tr>
+                <!-- rowspan pour la colonne "Fonctionnalité" -->
+                <th rowspan="2" scope="col" style="text-align:left;">Fonctionnalité</th>
+                <!-- colspan pour le groupe "Conseil" -->
+                <th colspan="2" scope="colgroup">Conseil</th>
+                <!-- colspan pour le groupe "Développement" -->
+                <th colspan="2" scope="colgroup">Développement</th>
+              </tr>
+              <tr>
+                <th scope="col">Starter<br/><span class="recommended-badge" style="background:transparent;color:var(--slate);border:1px solid var(--border);">Dès 2 900 €</span></th>
+                <th scope="col" class="plan-recommended">Business<br/><span class="recommended-badge">Populaire</span><br/><small style="color:var(--teal);font-size:0.75rem;">Dès 7 900 €</small></th>
+                <th scope="col">MVP<br/><span class="recommended-badge" style="background:transparent;color:var(--slate);border:1px solid var(--border);">Dès 12 000 €</span></th>
+                <th scope="col">Entreprise<br/><span class="recommended-badge" style="background:transparent;color:var(--slate);border:1px solid var(--border);">Sur devis</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="category-head" colspan="5">Livrables & accompagnement</td></tr>
+              <tr>
+                <td>Audit initial</td>
+                <td class="check">✓</td>
+                <td class="check plan-recommended">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Roadmap stratégique</td>
+                <td class="check">✓</td>
+                <td class="check plan-recommended">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Rapport exécutif</td>
+                <td class="cross">—</td>
+                <td class="check plan-recommended">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Ateliers de co-construction</td>
+                <td>1 atelier</td>
+                <td class="plan-recommended">3 ateliers</td>
+                <td>Illimité</td>
+                <td>Illimité</td>
+              </tr>
+
+              <tr><td class="category-head" colspan="5">Développement & déploiement</td></tr>
+              <tr>
+                <td>Développement de modèles IA</td>
+                <td class="cross">—</td>
+                <td class="cross plan-recommended">—</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Intégration API</td>
+                <td class="cross">—</td>
+                <td class="cross plan-recommended">—</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Déploiement cloud (MLOps)</td>
+                <td class="cross">—</td>
+                <td class="cross plan-recommended">—</td>
+                <td>Optionnel</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Dashboard & reporting</td>
+                <td class="cross">—</td>
+                <td class="plan-recommended">Basique</td>
+                <td>Avancé</td>
+                <td>Sur-mesure</td>
+              </tr>
+
+              <tr><td class="category-head" colspan="5">Support & suivi</td></tr>
+              <tr>
+                <td>Support email</td>
+                <td>30 jours</td>
+                <td class="plan-recommended">90 jours</td>
+                <td>6 mois</td>
+                <td>12 mois</td>
+              </tr>
+              <tr>
+                <td>Chef de projet dédié</td>
+                <td class="cross">—</td>
+                <td class="check plan-recommended">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>SLA garanti</td>
+                <td class="cross">—</td>
+                <td class="cross plan-recommended">—</td>
+                <td class="cross">—</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Formation de vos équipes</td>
+                <td class="cross">—</td>
+                <td class="check plan-recommended">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+
+              <tr>
+                <td style="font-family:var(--font-head); font-weight:700; color:var(--white);">Prix indicatif HT</td>
+                <td class="price-highlight">2 900 €</td>
+                <td class="price-highlight plan-recommended">7 900 €</td>
+                <td class="price-highlight">12 000 €</td>
+                <td class="price-highlight">Sur devis</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:16px; font-size:0.8rem; color:var(--slate); text-align:center;">
+          * Tarifs indicatifs. Devis personnalisé gratuit sous 48h. TVA non applicable (art. 293 B du CGI).
+        </p>
+        <div style="text-align:center; margin-top:32px;">
+          <a href="contact.html" class="btn btn-primary">Demander un devis personnalisé</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Nexa<span>Core</span></a>
+          <p>Agence de conseil en intelligence artificielle et transformation digitale.</p>
+        </div>
+        <nav class="footer-col" aria-label="Plan du site">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="about.html">À propos</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Galerie</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Services">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">IA & Machine Learning</a></li>
+            <li><a href="services.html">Cloud & DevOps</a></li>
+            <li><a href="services.html">Data Engineering</a></li>
+            <li><a href="services.html">Cybersécurité</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@nexacore.io">hello@nexacore.io</a></li>
+            <li><a href="tel:+212522000000">+212 5 22 00 00 00</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 NexaCore SAS. Tous droits réservés.</p>
+        <nav class="footer-legal" aria-label="Mentions légales">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">CGU</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

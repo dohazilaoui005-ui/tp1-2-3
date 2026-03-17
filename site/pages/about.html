@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>À propos – NexaCore</title>
+  <meta name="description" content="Découvrez l'équipe NexaCore, notre histoire, nos valeurs et notre vision de l'intelligence artificielle éthique et responsable." />
+  <meta name="author" content="NexaCore" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nexacore.io/pages/about.html" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://nexacore.io/pages/about.html" />
+  <meta property="og:title"       content="À propos de NexaCore – Notre équipe & vision" />
+  <meta property="og:description" content="Une équipe passionnée d'experts en IA, data et cloud au service de votre transformation digitale." />
+  <meta property="og:image"       content="https://nexacore.io/images/og-about.jpg" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23080c14'/><text y='24' x='4' font-size='22' fill='%230ff4c6'>N</text></svg>" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+    }
+    .timeline-item { position: relative; padding-bottom: 48px; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -38px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--ink);
+      border: 2px solid var(--teal);
+      box-shadow: 0 0 12px var(--teal);
+    }
+    .timeline-year {
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .timeline-item h3 { margin-bottom: 6px; font-size: 1.05rem; }
+    .timeline-item p { font-size: 0.9rem; }
+
+    /* VALUES */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .value-card {
+      background: var(--ink-mid);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+      display: flex;
+      gap: 20px;
+    }
+    .value-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 4px;
+    }
+    .value-card h3 { font-size: 1rem; margin-bottom: 6px; }
+    .value-card p  { font-size: 0.87rem; }
+
+    /* TEAM */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .team-card { text-align: center; }
+    .team-card figure { position: relative; }
+    .team-photo-wrap {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--border-hi);
+    }
+    .team-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(15,244,198,0.15), transparent);
+    }
+    .team-photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .team-card:hover .team-photo-wrap img { transform: scale(1.08); }
+    figcaption { margin-top: 4px; }
+    figcaption h3 { font-size: 1rem; margin-bottom: 2px; }
+    figcaption .role {
+      font-size: 0.78rem;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+    }
+    figcaption p { font-size: 0.85rem; }
+
+    /* SPLIT SECTION */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .split-visual {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .split-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7) saturate(0.8);
+    }
+    .split-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--border-hi);
+      border-radius: var(--r-xl);
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .split { grid-template-columns: 1fr; gap: 40px; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav" role="navigation" aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Nexa<span>Core</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Galerie</a></li>
+        <li><a href="contact.html" class="nav-cta btn">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <header class="page-hero">
+      <div class="container">
+        <div class="label-tag" style="justify-content:center;">Notre histoire</div>
+        <h1>Nous sommes <span class="teal">NexaCore</span></h1>
+        <p class="lead">Une équipe de passionnés convaincus que l'IA peut changer positivement le monde, un projet à la fois.</p>
+      </div>
+    </header>
+
+    <!-- HISTOIRE / SPLIT -->
+    <section style="padding-top:0;">
+      <div class="container">
+        <div class="split">
+          <div>
+            <div class="label-tag">Depuis 2017</div>
+            <h2>Nés de la conviction que l'IA doit être accessible</h2>
+            <p class="lead" style="font-size:1rem; margin:20px 0;">Fondée à Casablanca par trois ingénieurs passionnés, NexaCore est née d'un constat simple : les PME africaines et européennes n'avaient pas accès aux mêmes outils IA que les grandes corporations.</p>
+            <p>Aujourd'hui, nous sommes une équipe de 35 experts répartis entre Casablanca, Paris et Montréal. Nous avons livré plus de 120 projets dans 14 pays, des startups aux multinationales.</p>
+            <a href="contact.html" class="btn btn-primary" style="margin-top:28px;">Rejoindre l'aventure</a>
+          </div>
+          <div class="split-visual reveal">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=70"
+              alt="L'équipe NexaCore en réunion de travail dans les bureaux de Casablanca"
+              loading="lazy"
+              width="700" height="525"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section style="background:var(--ink-mid);">
+      <div class="container">
+        <div class="section-head">
+          <div class="label-tag">Notre parcours</div>
+          <h2>Les grandes étapes</h2>
+        </div>
+        <div style="max-width:600px; margin:0 auto;">
+          <div class="timeline">
+            <div class="timeline-item reveal">
+              <p class="timeline-year">2017</p>
+              <h3>Fondation à Casablanca</h3>
+              <p>Création de NexaCore par Imane Tahiri, Adam Berrada et Sofia El Mansouri. Premiers projets de conseil data.</p>
+            </div>
+            <div class="timeline-item reveal delay-1">
+              <p class="timeline-year">2019</p>
+              <h3>Ouverture du bureau Paris</h3>
+              <p>Extension vers le marché européen et signature du premier grand compte : Société Générale.</p>
+            </div>
+            <div class="timeline-item reveal delay-2">
+              <p class="timeline-year">2021</p>
+              <h3>Lancement de NexaLab</h3>
+              <p>Notre laboratoire de R&D dédié aux LLM et à l'IA générative appliquée aux entreprises africaines.</p>
+            </div>
+            <div class="timeline-item reveal delay-3">
+              <p class="timeline-year">2023</p>
+              <h3>Prix de l'Innovation IA – Afrique</h3>
+              <p>Récompensés par le Africa Tech Festival pour notre plateforme de microfinance basée sur l'IA.</p>
+            </div>
+            <div class="timeline-item reveal delay-4">
+              <p class="timeline-year">2025</p>
+              <h3>Bureau Montréal & 35 collaborateurs</h3>
+              <p>Expansion nord-américaine et constitution de notre équipe actuelle de 35 experts multidisciplinaires.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALEURS -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div class="label-tag">Ce qui nous anime</div>
+          <h2>Nos valeurs fondamentales</h2>
+          <p>Elles guident chacune de nos décisions, de l'avant-vente au support post-livraison.</p>
+        </div>
+        <div class="values-grid">
+          <div class="value-card reveal">
+            <div class="value-icon" aria-hidden="true">🎯</div>
+            <div>
+              <h3>Excellence sans compromis</h3>
+              <p>Nous ne livrons que ce dont nous sommes fiers. Chaque ligne de code, chaque modèle, chaque rapport est soumis à notre exigence interne.</p>
+            </div>
+          </div>
+          <div class="value-card reveal delay-1">
+            <div class="value-icon" aria-hidden="true">🤝</div>
+            <div>
+              <h3>Partenariat véritable</h3>
+              <p>Nous ne sommes pas des prestataires. Nous nous investissons comme si c'était notre propre entreprise, alignés sur vos objectifs long terme.</p>
+            </div>
+          </div>
+          <div class="value-card reveal delay-2">
+            <div class="value-icon" aria-hidden="true">⚖️</div>
+            <div>
+              <h3>IA éthique & responsable</h3>
+              <p>Chaque système que nous construisons est auditable, explicable et conforme aux réglementations en vigueur (RGPD, AI Act).</p>
+            </div>
+          </div>
+          <div class="value-card reveal delay-3">
+            <div class="value-icon" aria-hidden="true">🌍</div>
+            <div>
+              <h3>Impact positif</h3>
+              <p>Priorité aux projets à impact social positif : santé, éducation, agriculture intelligente et inclusion financière.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÉQUIPE -->
+    <section style="background:var(--ink-mid);">
+      <div class="container">
+        <div class="section-head">
+          <div class="label-tag">Les visages de NexaCore</div>
+          <h2>Notre équipe de direction</h2>
+          <p>Des expertes et experts aux profils complémentaires, unis par la passion de l'impact technologique.</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <figure>
+              <div class="team-photo-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=70"
+                  alt="Portrait d'Imane Tahiri, CEO et co-fondatrice de NexaCore"
+                  loading="lazy"
+                  width="400" height="400"
+                />
+              </div>
+              <figcaption>
+                <h3>Imane Tahiri</h3>
+                <span class="role">CEO & Co-fondatrice</span>
+                <p>Ingénieure Polytechnique, ex-Google Brain. 12 ans d'expérience en IA appliquée.</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="team-card reveal delay-2">
+            <figure>
+              <div class="team-photo-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=70"
+                  alt="Portrait d'Adam Berrada, CTO et co-fondateur de NexaCore"
+                  loading="lazy"
+                  width="400" height="400"
+                />
+              </div>
+              <figcaption>
+                <h3>Adam Berrada</h3>
+                <span class="role">CTO & Co-fondateur</span>
+                <p>PhD en Machine Learning (MIT). Architecte des systèmes distribués et des LLMs.</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="team-card reveal delay-4">
+            <figure>
+              <div class="team-photo-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=70"
+                  alt="Portrait de Sofia El Mansouri, CDO et co-fondatrice de NexaCore"
+                  loading="lazy"
+                  width="400" height="400"
+                />
+              </div>
+              <figcaption>
+                <h3>Sofia El Mansouri</h3>
+                <span class="role">CDO & Co-fondatrice</span>
+                <p>Experte en stratégie data et transformation organisationnelle. MBA HEC Paris.</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="team-card reveal">
+            <figure>
+              <div class="team-photo-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=70"
+                  alt="Portrait de Mehdi Bouzid, Lead Data Engineer chez NexaCore"
+                  loading="lazy"
+                  width="400" height="400"
+                />
+              </div>
+              <figcaption>
+                <h3>Mehdi Bouzid</h3>
+                <span class="role">Lead Data Engineer</span>
+                <p>Spécialiste Spark, Kafka et architectures lambda. Ex-Criteo, Paris.</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="team-card reveal delay-2">
+            <figure>
+              <div class="team-photo-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=70"
+                  alt="Portrait de Nora Idrissi, Head of AI Ethics chez NexaCore"
+                  loading="lazy"
+                  width="400" height="400"
+                />
+              </div>
+              <figcaption>
+                <h3>Nora Idrissi</h3>
+                <span class="role">Head of AI Ethics</span>
+                <p>Docteure en philosophie et IA. Référente RGPD et conformité EU AI Act.</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="team-card reveal delay-4">
+            <figure>
+              <div class="team-photo-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=70"
+                  alt="Portrait de Yassir Khayat, Cloud Architect chez NexaCore"
+                  loading="lazy"
+                  width="400" height="400"
+                />
+              </div>
+              <figcaption>
+                <h3>Yassir Khayat</h3>
+                <span class="role">Cloud Architect</span>
+                <p>Certifié AWS & GCP. Spécialiste MLOps et déploiement de modèles en production.</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Nexa<span>Core</span></a>
+          <p>Agence de conseil en intelligence artificielle et transformation digitale. Casablanca · Paris · Montréal.</p>
+        </div>
+        <nav class="footer-col" aria-label="Plan du site">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="about.html">À propos</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Galerie</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Services">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">IA & Machine Learning</a></li>
+            <li><a href="services.html">Cloud & DevOps</a></li>
+            <li><a href="services.html">Data Engineering</a></li>
+            <li><a href="services.html">Cybersécurité</a></li>
+            <li><a href="services.html">Formation</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@nexacore.io">hello@nexacore.io</a></li>
+            <li><a href="tel:+212522000000">+212 5 22 00 00 00</a></li>
+            <li><a href="contact.html">Casablanca, Maroc</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 NexaCore SAS. Tous droits réservés.</p>
+        <nav class="footer-legal" aria-label="Mentions légales">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">CGU</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

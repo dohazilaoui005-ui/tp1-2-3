@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galerie – NexaCore</title>
+  <meta name="description" content="Galerie photos de NexaCore : nos bureaux, événements, hackathons, équipes en action et réalisations clients." />
+  <meta name="author" content="NexaCore" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nexacore.io/pages/gallery.html" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://nexacore.io/pages/gallery.html" />
+  <meta property="og:title"       content="Galerie NexaCore – Photos & Événements" />
+  <meta property="og:description" content="Découvrez NexaCore en images : nos bureaux, nos équipes et nos réalisations." />
+  <meta property="og:image"       content="https://nexacore.io/images/og-gallery.jpg" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23080c14'/><text y='24' x='4' font-size='22' fill='%230ff4c6'>N</text></svg>" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    /* FILTER TABS */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .filter-btn {
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--slate);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--border-hi); color: var(--white); }
+    .filter-btn.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--ink);
+    }
+
+    /* MASONRY GALLERY */
+    .gallery-masonry {
+      columns: 3;
+      column-gap: 16px;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      border-radius: var(--r-md);
+      overflow: hidden;
+      position: relative;
+      background: var(--ink-light);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s, filter 0.4s;
+      cursor: zoom-in;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(0.75);
+    }
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,12,20,0.9) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+    .gallery-item-overlay h3 { font-size: 0.9rem; margin-bottom: 4px; }
+    .gallery-item-overlay p { font-size: 0.75rem; color: var(--slate); }
+    .gallery-item-cat {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: rgba(8,12,20,0.8);
+      border: 1px solid var(--border-hi);
+      color: var(--teal);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* HIDDEN STATE for filter */
+    .gallery-item.hidden {
+      display: none;
+    }
+
+    /* LIGHTBOX */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 20px;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--r-md);
+      object-fit: contain;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-size: 2rem;
+      color: var(--slate);
+      background: none;
+      border: none;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    #lightbox-close:hover { color: var(--white); }
+    #lightbox-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--slate);
+      max-width: 500px;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-masonry { columns: 2; }
+    }
+    @media (max-width: 560px) {
+      .gallery-masonry { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav" role="navigation" aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Nexa<span>Core</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Galerie</a></li>
+        <li><a href="contact.html" class="nav-cta btn">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <header class="page-hero">
+      <div class="container">
+        <div class="label-tag" style="justify-content:center;">En images</div>
+        <h1>Notre <span class="teal">galerie</span></h1>
+        <p class="lead">Bureaux, équipes, événements et réalisations. Bienvenue dans le quotidien de NexaCore.</p>
+      </div>
+    </header>
+
+    <section style="padding-top:0;">
+      <div class="container">
+
+        <!-- FILTER TABS -->
+        <div class="filter-tabs" role="group" aria-label="Filtrer la galerie par catégorie">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">Tout</button>
+          <button class="filter-btn" data-filter="bureaux" aria-pressed="false">Bureaux</button>
+          <button class="filter-btn" data-filter="equipe" aria-pressed="false">Équipe</button>
+          <button class="filter-btn" data-filter="evenements" aria-pressed="false">Événements</button>
+          <button class="filter-btn" data-filter="tech" aria-pressed="false">Tech & Data</button>
+        </div>
+
+        <!-- MASONRY GRID -->
+        <div class="gallery-masonry" id="gallery-grid">
+
+          <!-- ── Bureaux ── -->
+          <div class="gallery-item" data-cat="bureaux">
+            <span class="gallery-item-cat">Bureaux</span>
+            <!-- picture + srcset pour responsive -->
+            <picture>
+              <source
+                media="(max-width: 480px)"
+                srcset="https://images.unsplash.com/photo-1497366216548-37526070297c?w=480&q=65"
+              />
+              <source
+                media="(max-width: 900px)"
+                srcset="https://images.unsplash.com/photo-1497366216548-37526070297c?w=720&q=70"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1497366216548-37526070297c?w=480&q=65  480w,
+                  https://images.unsplash.com/photo-1497366216548-37526070297c?w=720&q=70  720w,
+                  https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080&q=75 1080w
+                "
+                sizes="(max-width:480px) 100vw, (max-width:900px) 50vw, 33vw"
+                alt="Open space moderne des bureaux NexaCore à Casablanca avec baies vitrées"
+                loading="lazy"
+                width="1080" height="720"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>Open space Casablanca</h3>
+              <p>Notre siège, lumière naturelle et design épuré.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-cat="equipe">
+            <span class="gallery-item-cat">Équipe</span>
+            <picture>
+              <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=480&q=65" />
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=480&q=65 480w,
+                  https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=75 800w
+                "
+                sizes="(max-width:480px) 100vw, 33vw"
+                alt="Réunion de l'équipe NexaCore autour d'une table de travail collaborative"
+                loading="lazy"
+                width="800" height="533"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>Séance de sprint planning</h3>
+              <p>Notre rituel Agile du lundi matin.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-cat="tech">
+            <span class="gallery-item-cat">Tech & Data</span>
+            <picture>
+              <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=480&q=65" />
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=480&q=65 480w,
+                  https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=75 800w
+                "
+                sizes="(max-width:480px) 100vw, 33vw"
+                alt="Dashboard analytique avec visualisations de données et graphiques complexes"
+                loading="lazy"
+                width="800" height="500"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>Dashboard analytics client</h3>
+              <p>Interface de visualisation en temps réel.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-cat="evenements">
+            <span class="gallery-item-cat">Événements</span>
+            <picture>
+              <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=480&q=65" />
+              <img
+                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=480&q=65 480w,
+                  https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=75 800w
+                "
+                sizes="(max-width:480px) 100vw, 33vw"
+                alt="Conférence NexaCore Summit 2024 avec présentation sur scène devant un large public"
+                loading="lazy"
+                width="800" height="533"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>NexaCore Summit 2024</h3>
+              <p>Notre conférence annuelle à Casablanca, 400 participants.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-cat="bureaux">
+            <span class="gallery-item-cat">Bureaux</span>
+            <picture>
+              <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=480&q=65" />
+              <img
+                src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=480&q=65 480w,
+                  https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&q=75 800w
+                "
+                sizes="(max-width:480px) 100vw, 33vw"
+                alt="Salle de réunion NexaCore Paris avec écran tactile et mobilier design"
+                loading="lazy"
+                width="800" height="600"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>Salle de réunion Paris</h3>
+              <p>Bureau satellite au cœur du 9ème arrondissement.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-cat="tech">
+            <span class="gallery-item-cat">Tech & Data</span>
+            <picture>
+              <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=480&q=65" />
+              <img
+                src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=480&q=65 480w,
+                  https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=75 800w
+                "
+                sizes="(max-width:480px) 100vw, 33vw"
+                alt="Interface d'un modèle de langage de grande taille en cours de développement"
+                loading="lazy"
+                width="800" height="450"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>LLM en développement</h3>
+              <p>Notre modèle spécialisé pour le secteur bancaire.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-cat="equipe">
+            <span class="gallery-item-cat">Équipe</span>
+            <picture>
+              <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=480&q=65" />
+              <img
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=480&q=65 480w,
+                  https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=75 800w
+                "
+                sizes="(max-width:480px) 100vw, 33vw"
+                alt="Équipe de développeurs NexaCore en session de pair-programming"
+                loading="lazy"
+                width="800" height="534"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>Session pair-programming</h3>
+              <p>Notre culture du partage de connaissances.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-cat="evenements">
+            <span class="gallery-item-cat">Événements</span>
+            <picture>
+              <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=480&q=65" />
+              <img
+                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=480&q=65 480w,
+                  https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=75 800w
+                "
+                sizes="(max-width:480px) 100vw, 33vw"
+                alt="Hackathon NexaCore avec équipes en compétition dans une grande salle"
+                loading="lazy"
+                width="800" height="534"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>Hackathon IA 2024</h3>
+              <p>48h d'innovation avec 30 équipes participantes.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-cat="tech">
+            <span class="gallery-item-cat">Tech & Data</span>
+            <picture>
+              <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=480&q=65" />
+              <img
+                src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=75"
+                srcset="
+                  https://images.unsplash.com/photo-1639322537228-f710d846310a?w=480&q=65 480w,
+                  https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=75 800w
+                "
+                sizes="(max-width:480px) 100vw, 33vw"
+                alt="Visualisation 3D d'un réseau de neurones artificiel en cours d'entraînement"
+                loading="lazy"
+                width="800" height="450"
+              />
+            </picture>
+            <div class="gallery-item-overlay">
+              <h3>Réseau de neurones 3D</h3>
+              <p>Visualisation d'un modèle transformer en cours d'entraînement.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Visionneuse d'image">
+    <button id="lightbox-close" aria-label="Fermer la visionneuse">&times;</button>
+    <img src="" alt="" />
+    <p id="lightbox-caption"></p>
+  </div>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Nexa<span>Core</span></a>
+          <p>Agence de conseil en intelligence artificielle et transformation digitale.</p>
+        </div>
+        <nav class="footer-col" aria-label="Plan du site">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="about.html">À propos</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Galerie</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Catégories galerie">
+          <h4>Galerie</h4>
+          <ul>
+            <li><a href="#" data-filter="bureaux" class="filter-link">Nos bureaux</a></li>
+            <li><a href="#" data-filter="equipe" class="filter-link">Notre équipe</a></li>
+            <li><a href="#" data-filter="evenements" class="filter-link">Événements</a></li>
+            <li><a href="#" data-filter="tech" class="filter-link">Tech & Data</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@nexacore.io">hello@nexacore.io</a></li>
+            <li><a href="contact.html">Nous contacter</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 NexaCore SAS. Tous droits réservés.</p>
+        <nav class="footer-legal" aria-label="Mentions légales">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">CGU</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    /* Filter gallery */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.gallery-item');
+
+    function applyFilter(cat) {
+      filterBtns.forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === cat);
+        b.setAttribute('aria-pressed', b.dataset.filter === cat);
+      });
+      items.forEach(item => {
+        const match = cat === 'all' || item.dataset.cat === cat;
+        item.classList.toggle('hidden', !match);
+      });
+    }
+
+    filterBtns.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
+
+    /* Lightbox enriched */
+    const lb = document.getElementById('lightbox');
+    const lbImg = lb.querySelector('img');
+    const lbCap = document.getElementById('lightbox-caption');
+
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = img.closest('.gallery-item').querySelector('h3')?.textContent || '';
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    document.getElementById('lightbox-close').addEventListener('click', () => {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+    lb.addEventListener('click', e => {
+      if (e.target === lb) { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lb.classList.contains('open')) {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
