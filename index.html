@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f9f9f9; }
+        .container { background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; max-width: 900px; margin: auto; }
+        .row { display: flex; gap: 10px; margin-bottom: 15px; }
+        input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
+        textarea { width: 100%; height: 80px; resize: vertical; }
+        button { cursor: pointer; border: none; border-radius: 5px; transition: 0.3s; }
+        .btn-send { background: #28a745; color: white; padding: 0 25px; font-weight: bold; }
+        .btn-add { background: #007bff; color: white; width: 40px; font-size: 20px; }
+        .header-row { display: flex; gap: 10px; margin-bottom: 5px; }
+        #responseArea { margin-top: 20px; border-top: 2px solid #eee; padding-top: 15px; }
+        pre { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; min-height: 50px; }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Postman</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <select id="method">
+            <option>GET</option>
+            <option>POST</option>
+            <option>PUT</option>
+            <option>DELETE</option>
+        </select>
+
+        <input type="text" id="url" placeholder="URL (ex: https://httpbin.org/get)">
+
+        <button onclick="faireRequete()">Envoyer</button>
+    </div>
+
+    <hr>
+
+    <div id="headersContainer">
+        <div>
+            <input type="text" class="h-key" placeholder="Header Key">
+            <input type="text" class="h-value" placeholder="Header Value">
+            <button onclick="ajouterHeader()">+</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <textarea id="body" placeholder="Body (JSON ou texte)" rows="6" cols="50"></textarea>
+
+    <hr>
+
+    <div>
+        <p><strong>Statut :</strong> <span id="status">-</span></p>
+
+        <p><strong>Response Headers :</strong></p>
+        <pre id="resHeaders"></pre>
+
+        <p><strong>Response Body :</strong></p>
+        <pre id="resBody"></pre>
+    </div>
+
+</div>
+
+<script>
+function ajouterHeader() {
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+        <input type="text" class="h-key" placeholder="Header Key">
+        <input type="text" class="h-value" placeholder="Header Value">
+        <button onclick="this.parentElement.remove()">-</button>
+    `;
+
+    document.getElementById("headersContainer").appendChild(div);
+}
+
+async function faireRequete() {
+    const method = document.getElementById("method").value;
+    const url = document.getElementById("url").value;
+    const body = document.getElementById("body").value;
+
+    const keys = document.querySelectorAll(".h-key");
+    const values = document.querySelectorAll(".h-value");
+
+    let headers = {};
+
+    keys.forEach((k, i) => {
+        const key = (k.value || "").trim();
+        const value = (values[i]?.value || "").trim();
+
+        if (key !== "") {
+            headers[key] = value;
+        }
+    });
+
+    let options = {
+        method: method,
+        headers: headers
+    };
+
+    try {
+        if (method !== "GET" && body.trim() !== "") {
+
+            headers["Content-Type"] = "application/json";
+
+            options.body = JSON.stringify(JSON.parse(body));
+        }
+
+        const res = await fetch(url, options);
+
+        document.getElementById("status").innerText = res.status;
+
+        let headersText = "";
+        res.headers.forEach((v, k) => {
+            headersText += k + ": " + v + "\n";
+        });
+
+        document.getElementById("resHeaders").innerText = headersText;
+
+        const data = await res.text();
+        document.getElementById("resBody").innerText = data;
+
+    } catch (err) {
+        document.getElementById("status").innerText = "ERROR";
+        document.getElementById("resBody").innerText = err.message;
+    }
+}
+</script>
+
+</body>
+</html>
